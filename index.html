@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kalkulator Persamaan Diferensial Homogen Derajat 0 — selesaikan, pelajari langkah, dan latihan kuis.">
+    <title>Kalkulator PD Homogen Derajat 0</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+            options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea'] }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body>
+
+<!-- Background Effects -->
+<div class="bg-effects">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+</div>
+
+<div class="app-container">
+
+    <!-- Header -->
+    <header class="app-header">
+        <h1>Kalkulator PD Homogen</h1>
+        <p class="subtitle">Penyelesaian Persamaan Diferensial Homogen Derajat 0</p>
+        <span class="badge">Kelompok 2</span>
+    </header>
+
+    <!-- Tab Navigation -->
+    <nav class="tab-nav">
+        <button class="tab-btn active" data-tab="calculator" onclick="switchTab('calculator')">
+            <span class="tab-icon">🧮</span>
+            <span class="tab-text">Kalkulator</span>
+        </button>
+        <button class="tab-btn" data-tab="steps" onclick="switchTab('steps')">
+            <span class="tab-icon">📝</span>
+            <span class="tab-text">Langkah</span>
+        </button>
+        <button class="tab-btn" data-tab="quiz" onclick="switchTab('quiz')">
+            <span class="tab-icon">🎯</span>
+            <span class="tab-text">Kuis</span>
+        </button>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- TAB: Calculator                                                    -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <section id="tab-calculator" class="tab-content active">
+        <div class="glass-card">
+            <div class="card-title">
+                <div class="icon">📐</div>
+                Masukkan Persamaan
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Persamaan Diferensial</label>
+                <div class="equation-prefix">
+                    <span class="prefix-label">dy/dx =</span>
+                    <input type="text" id="equationInput" class="form-input"
+                           placeholder="contoh: (x+y)/(x-y)" autocomplete="off">
+                </div>
+                <div class="example-list">
+                    <div class="example-title">Contoh persamaan</div>
+                    <code onclick="useExample('y/x')">y/x</code>
+                    <code onclick="useExample('(x+y)/(x-y)')"> (x+y)/(x-y)</code>
+                    <code onclick="useExample('(x**2+y**2)/(x*y)')">(x²+y²)/(xy)</code>
+                    <code onclick="useExample('(x+2*y)/(x)')"> (x+2y)/x</code>
+                </div>
+            </div>
+
+            <div class="toggle-group">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleInitial" onchange="toggleInitial()">
+                    <span class="toggle-slider"></span>
+                </label>
+                <span class="toggle-label">Gunakan syarat awal \( y(x_0) = y_0 \)</span>
+            </div>
+
+            <div class="initial-conditions" id="initialConditions">
+                <div class="form-group">
+                    <label class="form-label">\( x_0 \)</label>
+                    <input type="number" id="x0Input" class="form-input" placeholder="1" step="any">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">\( y_0 \)</label>
+                    <input type="number" id="y0Input" class="form-input" placeholder="2" step="any">
+                </div>
+            </div>
+
+            <button class="btn btn-primary" id="solveBtn" onclick="solveEquation()">
+                🚀 Hitung Solusi
+            </button>
+        </div>
+
+        <!-- Result Area -->
+        <div id="resultArea" class="result-area"></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- TAB: Steps                                                         -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <section id="tab-steps" class="tab-content">
+        <div id="stepsContainer">
+            <div class="steps-placeholder">
+                <div class="icon-big">📝</div>
+                <p>Belum ada langkah penyelesaian.<br>Selesaikan soal di tab <strong>Kalkulator</strong> terlebih dahulu.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- TAB: Quiz                                                          -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <section id="tab-quiz" class="tab-content">
+        <div id="quizContainer"></div>
+        <div id="quizResult" class="quiz-result"></div>
+    </section>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
